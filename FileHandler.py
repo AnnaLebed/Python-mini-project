@@ -26,5 +26,5 @@ class FileHandler:
 
 
 
-# FileHandler.load_from_csv('user1.csv')
+FileHandler.load_from_csv('user.csv')
 # append_to_csv('user.csv', Anna)

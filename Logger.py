@@ -21,4 +21,3 @@ first = 'second test string'
 Logger.add_to_log(first)
 
 
-
