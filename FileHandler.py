@@ -6,7 +6,6 @@ class FileHandler:
         try:
             with open(file_name) as csv_file:
                 reader = csv.reader(csv_file, delimiter=',')
-
                 count = 0
                 for row in reader:
                     print(row)
