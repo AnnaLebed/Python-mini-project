@@ -1,7 +1,7 @@
 id,first_name,last_name,password,position,salary,role
 111111,Amir,Bernstein,111111,manager,15000,employee
 222222,Hen,Biton,222222,customer,n/a,customer
-333333,Anna,Lebid,333333,customer,n/a,customer
+333333,Anna,Lebid,333222,customer,n/a,customer
 444444,Zlata,Lebid,444441,customer,n/a,customer
 555555,Ira,Pan,555111,customer,n/a,customer
 666666,Omer,Adam,666222,customer,n/a,customer
