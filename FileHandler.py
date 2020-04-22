@@ -1,59 +1,62 @@
 import csv
-import sys
-import pathlib
 import os
+import pathlib
 
 
 class FileHandler:
-    __dbDir = ''
+    file_path = ''
 
-    # to create a full path from any file name
     def __init__(self):
-        self.__dbDir = str(pathlib.Path(__file__).parent) + os.sep + "db"
+        self.file_path
+        self.readen_data = []
 
-    # to get the file path (without hardcoding)
-    def get_file_path(self, file_name):
-        return self.__dbDir + os.sep + file_name
+    def directory(self, file_name):
+        self.file_path = pathlib.Path(__file__).parent.absolute().joinpath(file_name)
 
     def load_from_csv(self, file_name):
+        self.directory(file_name)
         try:
-            data = []
-            with open(self.get_file_path(file_name)) as csv_file:
-                reader = csv.reader(csv_file)
+            self.readen_data = []
 
+            with open(self.file_path) as csv_file:
+                reader = csv.reader(csv_file, delimiter=',')
                 for row in reader:
-                    data.append(row)
+                    self.readen_data.append(row)
+                print(self.readen_data)
+
+                # storing it in class just in case
+
         except FileNotFoundError as e:
             print(e)
             print("There is no file with such name!")
-        return data
 
-    def append_to_csv(self, file_name, new_data):
+        return self.readen_data
+
+    def write_to_file(self, data):
         try:
-            loaded_data = self.load_from_csv(file_name)
-            columns = loaded_data.pop(0)
 
-            if len(columns) != len(new_data):
-                raise Exception("Incorrect data structure. " + str(columns) + " expected")
+            print(self.readen_data[0])
+            columns = self.readen_data.pop(0)
+            if len(data) != len(self.readen_data[0]):
+                raise Exception("Incorrect data structure")
 
-            for row in loaded_data:
-                if int(row[0]) == int(new_data[0]):
+            for row in self.readen_data:
+                if int(row[0]) == int(data[0]):
                     raise Exception("Duplicated id found")
 
-            try:
-                loaded_data.append(new_data)
-                writer = csv.writer(open(self.get_file_path(file_name), 'a', newline=''))
-                writer.writerow(new_data)
+            with open(self.file_path, 'a') as fd:
+                stringified_row = ", ".join(str(x) for x in data) + "\n"
+                fd.write(stringified_row)
 
-            except Exception as e:
-                raise Exception("Error while trying to append to {} error is:{}".format(file_name, e))
-
-            return True
         except Exception as e:
-            print("Error: " + str(e))
-            return False
+            print(e)
+
+    def append_to_csv(self, file_name, data):
+        self.load_from_csv(file_name)
+        self.write_to_file(data)
 
     def remove_from_csv(self, file_name, id):
+        self.load_from_csv(file_name)
         try:
             loaded_data = self.load_from_csv(file_name)
             columns = loaded_data.pop(0)
@@ -72,16 +75,52 @@ class FileHandler:
             print("Error: " + str(e))
             return False
 
+    # def update_csv(self, file_name, id, data):
+    #     try:
+    #        self.load_from_csv(file_name)
+    #
+    #
+    #         columns =  self.readen_data.pop(0)
+    #
+    #
+    #         for index, row in enumerate( self.readen_data, start=0):
+    #             if int(row[0]) == int(id):
+    #
+    #                 self.readen_data.pop(index)
+    #
+    #
+    #                 self.readen_data.insert(index, data)
+    #                 break
+    #
+    #         # returning columns names back to the content (at the first place)
+    #         self.readen_data.insert(0, columns)
+    #
+    #         # storing content back to the file
+    #
+    #         заменить
+    #         на
+    #         write
+    #         to
+    #         file:
+    #
+    #         self.write_to_file(data)
+    #
+    #         writer = csv.writer(open(self.get_file_path(file_name), 'w', newline=''))
+    #
+    #         writer.writerows(content)
+    #
+    #         return True
+    #     except Exception as e:
+    #         print("Error: " + str(e))
+    #         return False
 
+# fh = FileHandler()
+# # fh.load_from_csv('User.csv')
+#
+#
+# print(fh.append_to_csv('User.csv', [1001000, 'Daniel', 'Leffiz', '101010', 'manager', 20000, 'employee']))
 
-fh = FileHandler()
-# data = fh.load_from_csv('User.csv')
-# print(data)
-#
-# print(fh.append_to_csv('User.csv', [281111, 'Daniel', 'Leffiz', '101010', 'manager', 20000, 'employee']))
-
-print(fh.remove_from_csv('user.csv', 999999))
+# print(fh.remove_from_csv('user.csv', 999999))
 #
 #
 #
-

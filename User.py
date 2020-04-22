@@ -3,24 +3,28 @@ import os
 from pathlib import Path
 from FileHandler import FileHandler
 
+
 class User:
+    def __init__(self):
+        self.file_handler = FileHandler()
 
-    def user_auth(id,password):
-        # location = "D:\\Anna\\Bootcamp exercises\\python\\Python-mini-project"
+    def user_auth(self, id, password):
+
         try:
-            # with open(os.path.join(location + 'User.csv') as users_file:
-            with open('D:\\Anna\\Bootcamp exercises\\python\\Python-mini-project\\User.csv') as users_file:
-                users_file_reader = csv.reader(users_file)
+            users = self.file_handler.load_from_csv('User.csv')
 
-                for row in users_file_reader:
-                    if row[0] == id and row[3] == password:
-                        return row[6]
+            users.pop(0)
+
+            for row in users:
+                if int(row[0]) == int(id) and str(row[3]) == str(password):
+                    return str(row[6])
                 else:
                     return False
+
         except Exception as e:
             print(e)
 
 
-user1 = User
+user1 = User()
 print(user1.user_auth("111111", "111111"))
 
