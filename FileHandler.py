@@ -22,7 +22,7 @@ class FileHandler:
                 reader = csv.reader(csv_file, delimiter=',')
                 for row in reader:
                     self.readen_data.append(row)
-                print(self.readen_data)
+                # print(self.readen_data)
 
                 # storing it in class just in case
 
@@ -56,7 +56,7 @@ class FileHandler:
         self.write_to_file(data)
 
     def remove_from_csv(self, file_name, id):
-        self.load_from_csv(file_name)
+
         try:
             loaded_data = self.load_from_csv(file_name)
             columns = loaded_data.pop(0)
@@ -67,7 +67,8 @@ class FileHandler:
                     break
 
             loaded_data.insert(0, columns)
-            writer = csv.writer(open(self.get_file_path(file_name), 'w', newline=''))
+
+            writer = csv.writer(open(self.file_path, 'w', newline=''))
             writer.writerows(loaded_data)
             return True
 
@@ -120,7 +121,7 @@ class FileHandler:
 #
 # print(fh.append_to_csv('User.csv', [1001000, 'Daniel', 'Leffiz', '101010', 'manager', 20000, 'employee']))
 
-# print(fh.remove_from_csv('user.csv', 999999))
+# print(fh.remove_from_csv('user.csv', 888888))
 #
 #
 #
