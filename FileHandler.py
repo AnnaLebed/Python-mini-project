@@ -12,6 +12,7 @@ class FileHandler:
 
     def directory(self, file_name):
         self.file_path = pathlib.Path(__file__).parent.absolute().joinpath(file_name)
+        return self.file_path
 
     def load_from_csv(self, file_name):
         self.directory(file_name)
