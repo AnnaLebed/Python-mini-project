@@ -5,10 +5,9 @@ id,first_name,last_name,password,position,salary,role
 444444,Zlata,Lebid,444441,customer,n/a,customer
 555555,Ira,Pan,555111,customer,n/a,customer
 666666,Omer,Adam,666222,customer,n/a,customer
-777777,Igor,Bern,777333,customer,n/a,customer
 281111, Daniel, Leffiz,101010, manager,20000, employee
 281111, Daniel, Leffiz,101010, manager,20000, employee
 281111, Daniel, Leffiz,101010, manager,20000, employee
-1001000, Daniel, Leffiz, 101010, manager, 20000, employee
-1001000, Daniel, Leffiz, 101010, manager, 20000, employee
-1001000, Daniel, Leffiz, 101010, manager, 20000, employee
+1001000, Daniel, Leffiz,101010, manager,20000, employee
+1001000, Daniel, Leffiz,101010, manager,20000, employee
+1001000, Daniel, Leffiz,101010, manager,20000, employee
